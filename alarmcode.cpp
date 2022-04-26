@@ -1,7 +1,7 @@
 //Bibliotecas usadas
-#include <Adafruit_NeoPixel.h> // Library for Neo Pixel Ring light
-#include <LiquidCrystal.h> //Library for Display LCD
-#include <Keypad.h> //Library used for Keypad
+// #include <Adafruit_NeoPixel.h> // Library for Neo Pixel Ring light
+// #include <LiquidCrystal.h> //Library for Display LCD
+// #include <Keypad.h> //Library used for Keypad
 
 //LCD, keypad and LED Strip configurations
 
@@ -19,7 +19,7 @@ int LCDcol = 0;
 
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
-//Variavies
+//Variables
 
 void tela(String mostrai);
 String setarhora(String hora2,String mostra);
@@ -37,7 +37,7 @@ void setup() {
 
 void loop() { 
   
-//limpa a tela e os leds para reinicio do loop
+//Erase what is on the screen and the LEDs restarting the loop
   lcd.clear();
   strip.clear();
   strip.show();
@@ -50,7 +50,7 @@ void loop() {
   tela(mostra2);
   hora2=setarhora(hora2,mostra2);
 
-//Converção da hora informada (String) pra horas e minutos(inteiros)
+//Converting the informed hour (String) to whole hours and minutes
 
   int hAtual =  hora.toInt() / 100;
   int hAlarme = hora2.toInt() / 100;
@@ -71,8 +71,7 @@ void loop() {
     hAlarme --;
   }
     
-  
-//Loop que incrementa a hora até ela chegar na hora desejada simulando um RCT
+//Loop that increments the hour until it gets to the desired hour just like a RCT
   
   for (;;)
   {
@@ -82,8 +81,8 @@ void loop() {
     {
       hAtual ++;
       
-      //Como o despertador funciona em um formato de 24 horas: Quando o horário chegar em 24, reinici para 00:00
-      
+      //Since the alarm works in a 24-hours format: When the time gets to 24, it restarts becoming 00:00
+
       if (hAtual == 24)
       {
         hAtual = 0;
@@ -94,22 +93,22 @@ void loop() {
         mAtual = 0;
     }
     Serial.print(mAlarme - mAtual);
-    if ((mAlarme - 12) - mAtual <= 0 && hAlarme == hAtual) { //12 minutos antes do despertar, ligar o primeiro LED
-      break;
+    if ((mAlarme - 12) - mAtual <= 0 && hAlarme == hAtual) { // 12 minutes before the alarm's time, the first LED turns on and then the others
+      break; 
     }
     printaContador(hAtual, mAtual);
-    delay(60000); //espera 1 minuto real
+    delay(60000); //waits for 1 real minute
     mAtual ++;
   }
-  lcd.setCursor(0, 0); //Na primeira linha do LCD, mostrar:
+  lcd.setCursor(0, 0); //In the first line of the LCD, shows:
   lcd.print("====Hora====");
   lcd.setCursor(0, 1);
-  lcd.print("===De Acordar==="); //Na segunda linha do LCD, mostrar:
+  lcd.print("===De Acordar==="); //In the second line of the LCD, shows:
   int brilho, vetor[12] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-  
-//Loop para acender o led gradualmente po POSIÇÂO
+
+//Loop that turns the LEDs on gradually per POSITION
   //while (keypad.getKey() != '*') {
-    for (brilho = 0; brilho <= 12/*12*/; brilho++)
+    for (brilho = 0; brilho <= 12; brilho++)
     {
       //char tecla = keypad.getKey();
       //if (tecla == '*') {
@@ -136,7 +135,7 @@ void loop() {
   //}
 }
 
-//Função printar a horas até o despertar
+// Function that prints the hour until it gets to the alarms time
 
 void printaContador(int h, int m){
   lcd.setCursor(5, 1);
@@ -147,7 +146,7 @@ void printaContador(int h, int m){
   lcd.print(m);
 }
 
-//Função que seta as horas
+//Funtion that sets the hour
 
 String setarhora(String hora2,String mostra){
   tela(mostra);
@@ -155,7 +154,8 @@ String setarhora(String hora2,String mostra){
   do {
     char tecla = keypad.getKey();
     if (tecla) {
-      if (tecla == '#' || tecla == 'A' || tecla == 'B' || tecla == 'C') { //Se o usuário inserir "*", o LCD aparece "Tecla Inválida":
+      //If the user inserts "*", the LCD prints "Tecla Inválida":
+      if (tecla == '#' || tecla == 'A' || tecla == 'B' || tecla == 'C') { 
         ii = 5;
         lcd.clear();
         lcd.setCursor(0, 0);
@@ -168,7 +168,7 @@ String setarhora(String hora2,String mostra){
         lcd.print(":");
         lcd.setCursor(ii, 1);
       }
-      else if (tecla == 'D') { //limpando toda a tela
+      else if (tecla == 'D') { //Erase the entire screen
         ii = 5;
         lcd.clear();
         lcd.setCursor(0, 0);
@@ -177,11 +177,10 @@ String setarhora(String hora2,String mostra){
         lcd.print(":");
         lcd.setCursor(ii, 1);
         hora2 = "";
-
       }
-      
-      /* ----------- adicionar else if para, se o usuário inserir o número 3 ou maior na cursor de linha 2 e coluna 5 para que o usuário
-      não insira algo do tipo: 30h ou <= 70 minutos ------------- */
+
+      /* add else if to, if the user inserts the number 3 or higher of the cursor in the line 2 and column 5, so that
+      the user does not insert something like: 30h ou <= 70 minutes */
       
       else if (ii == 7) {
         lcd.setCursor(8, 1);
@@ -200,7 +199,7 @@ String setarhora(String hora2,String mostra){
    return hora2;
   }
 
-//Função para escolher inforção exibida na tela
+//Function to choose the information that will be displayed on the screen
 
 void tela(String mostrai){
   lcd.clear();
