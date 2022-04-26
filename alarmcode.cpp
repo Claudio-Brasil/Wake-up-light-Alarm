@@ -57,6 +57,9 @@ void loop() {
   int mAtual =  hora.toInt() % 100;
   int mAlarme = hora2.toInt() % 100;
 
+  /* add else if to, if the user inserts the number 3 or higher of the cursor in the line 2 and column 5, so that
+  the user does not insert something like: 30h ou <= 70 minutes */
+
   lcd.clear();
   Serial.print(hAtual);
   if(hAtual >= 30 || mAtual >= 70) {
@@ -177,11 +180,7 @@ String setarhora(String hora2,String mostra){
         lcd.print(":");
         lcd.setCursor(ii, 1);
         hora2 = "";
-      }
-
-      /* add else if to, if the user inserts the number 3 or higher of the cursor in the line 2 and column 5, so that
-      the user does not insert something like: 30h ou <= 70 minutes */
-      
+      }     
       else if (ii == 7) {
         lcd.setCursor(8, 1);
         lcd.print(tecla);
