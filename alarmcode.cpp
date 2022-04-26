@@ -140,7 +140,8 @@ void loop() {
 
 // Function that prints the hour until it gets to the alarms time
 
-void printaContador(int h, int m){
+void printaContador(int h, int m)
+{
   lcd.setCursor(5, 1);
   lcd.print(h);
   lcd.setCursor(7, 1);
