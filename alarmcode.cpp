@@ -1,4 +1,4 @@
-//Bibliotecas usadas
+//Libraries:
 // #include <Adafruit_NeoPixel.h> // Library for Neo Pixel Ring light
 // #include <LiquidCrystal.h> //Library for Display LCD
 // #include <Keypad.h> //Library used for Keypad
@@ -17,7 +17,7 @@ byte rowPins[ROWS] = {10, 9, 8, 7};
 byte colPins[COLS] = {A1, A2, A3, A4};
 int LCDcol = 0;
 
-Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
+Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
 //Variables
 
