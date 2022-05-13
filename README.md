@@ -2,7 +2,11 @@
 
 > ⚠ Status: Upgrading
 
-### This is the software used to program a soundless alarm using an Arduino.
+## This is the software used to program a soundless alarm using an Arduino.
+
+### This is how the hardware looks like:
+
+![image](https://user-images.githubusercontent.com/77110029/168192792-596cd04c-8460-43b6-89f6-41ad7330e712.png)
 
 ## The input is made by the user typing on the keypad:
 
